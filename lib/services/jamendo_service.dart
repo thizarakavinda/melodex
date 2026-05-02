@@ -5,7 +5,7 @@ import 'package:melodex/models/song_model.dart';
 class JamendoService {
   // Free Jamendo API — register at developer.jamendo.com for your own client_id
   // This uses the public demo client_id for development
-  static const String _clientId = '04a32f59';
+  static const String _clientId = '6da162c1';
   static const String _baseUrl = 'https://api.jamendo.com/v3.0';
 
   // static Future<List<SongModel>> searchSongs(
