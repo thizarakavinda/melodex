@@ -16,6 +16,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        splashFactory: NoSplash.splashFactory,
       ),
       home: const MainView(),
     );

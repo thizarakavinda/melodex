@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:melodex/theme/app_theme.dart';
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({super.key});
@@ -10,10 +11,6 @@ class DiscoverScreen extends StatefulWidget {
 class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Discover Screen"),
-      ),
-    );
+    return Scaffold(backgroundColor: AppTheme.bg);
   }
 }

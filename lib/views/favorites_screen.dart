@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:melodex/theme/app_theme.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -10,10 +11,6 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Text("Favorites Screen"),
-      ),
-    );
+    return Scaffold(backgroundColor: AppTheme.bg);
   }
 }
