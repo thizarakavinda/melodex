@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:melodex/theme/app_theme.dart';
 import 'package:melodex/widgets/custom_app_bar.dart';
 
