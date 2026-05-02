@@ -28,7 +28,8 @@ class SongModel {
       audioUrl: json['audio'] ?? '',
       imageUrl: json['album_image'] ?? json['image'] ?? '',
       duration: json['duration'] ?? 0,
-      genre: (json['musicinfo']?['tags']?['genres'] as List?)?.isNotEmpty == true
+      genre:
+          (json['musicinfo']?['tags']?['genres'] as List?)?.isNotEmpty == true
           ? json['musicinfo']['tags']['genres'][0]
           : 'Unknown',
     );
@@ -41,30 +42,31 @@ class SongModel {
   }
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'artistName': artistName,
-        'albumName': albumName,
-        'audioUrl': audioUrl,
-        'imageUrl': imageUrl,
-        'duration': duration,
-        'genre': genre,
-      };
+    'id': id,
+    'name': name,
+    'artistName': artistName,
+    'albumName': albumName,
+    'audioUrl': audioUrl,
+    'imageUrl': imageUrl,
+    'duration': duration,
+    'genre': genre,
+  };
 
   factory SongModel.fromJson(Map<String, dynamic> json) => SongModel(
-        id: json['id'],
-        name: json['name'],
-        artistName: json['artistName'],
-        albumName: json['albumName'],
-        audioUrl: json['audioUrl'],
-        imageUrl: json['imageUrl'],
-        duration: json['duration'],
-        genre: json['genre'],
-      );
+    id: json['id'],
+    name: json['name'],
+    artistName: json['artistName'],
+    albumName: json['albumName'],
+    audioUrl: json['audioUrl'],
+    imageUrl: json['imageUrl'],
+    duration: json['duration'],
+    genre: json['genre'],
+  );
 
   @override
   bool operator ==(Object other) => other is SongModel && other.id == id;
 
   @override
   int get hashCode => id.hashCode;
+  
 }
