@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:melodex/providers/music_provider.dart';
 import 'package:melodex/theme/app_theme.dart';
 import 'package:melodex/views/main_view.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => MusicProvider())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +30,6 @@ class MyApp extends StatelessWidget {
         splashFactory: NoSplash.splashFactory,
         textTheme: GoogleFonts.beVietnamProTextTheme(AppTheme.dark.textTheme),
       ),
-
       home: const MainView(),
     );
   }

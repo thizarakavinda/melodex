@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:melodex/models/song_model.dart';
+import 'package:melodex/services/jamendo_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -142,6 +143,19 @@ class MusicProvider extends ChangeNotifier {
     final data = prefs.getStringList('favorites') ?? [];
     _favorites = data.map((s) => SongModel.fromJson(jsonDecode(s))).toList();
     notifyListeners();
+  }
+
+  Future<void> loadFeaturedTracks() async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      _queue = await JamendoService.getFeatured();
+      _currentIndex = -1;
+      notifyListeners();
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+    }
   }
 
   @override
