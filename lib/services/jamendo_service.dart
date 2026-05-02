@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/song.dart';
+import 'package:melodex/models/song_model.dart';
 
 class JamendoService {
   // Free Jamendo API — register at developer.jamendo.com for your own client_id
@@ -8,67 +8,70 @@ class JamendoService {
   static const String _clientId = '04a32f59';
   static const String _baseUrl = 'https://api.jamendo.com/v3.0';
 
-  static Future<List<Song>> searchSongs(String query, {int limit = 20}) async {
-    final uri = Uri.parse('$_baseUrl/tracks/').replace(
-      queryParameters: {
-        'client_id': _clientId,
-        'format': 'json',
-        'limit': limit.toString(),
-        'search': query,
-        'include': 'musicinfo',
-        'audioformat': 'mp32',
-      },
-    );
+  // static Future<List<SongModel>> searchSongs(
+  //   String query, {
+  //   int limit = 20,
+  // }) async {
+  //   final uri = Uri.parse('$_baseUrl/tracks/').replace(
+  //     queryParameters: {
+  //       'client_id': _clientId,
+  //       'format': 'json',
+  //       'limit': limit.toString(),
+  //       'search': query,
+  //       'include': 'musicinfo',
+  //       'audioformat': 'mp32',
+  //     },
+  //   );
 
-    try {
-      final res = await http.get(uri).timeout(const Duration(seconds: 10));
-      if (res.statusCode == 200) {
-        final data = jsonDecode(res.body);
-        final results = data['results'] as List? ?? [];
-        return results
-            .map((t) => Song.fromJamendo(t))
-            .where((s) => s.audioUrl.isNotEmpty)
-            .toList();
-      }
-    } catch (e) {
-      // ignore
-    }
-    return [];
-  }
+  //   try {
+  //     final res = await http.get(uri).timeout(const Duration(seconds: 10));
+  //     if (res.statusCode == 200) {
+  //       final data = jsonDecode(res.body);
+  //       final results = data['results'] as List? ?? [];
+  //       return results
+  //           .map((t) => SongModel.fromJamendo(t))
+  //           .where((s) => s.audioUrl.isNotEmpty)
+  //           .toList();
+  //     }
+  //   } catch (e) {
+  //     // ignore
+  //   }
+  //   return [];
+  // }
 
-  static Future<List<Song>> getTrendingByGenre(
-    String genre, {
-    int limit = 20,
-  }) async {
-    final uri = Uri.parse('$_baseUrl/tracks/').replace(
-      queryParameters: {
-        'client_id': _clientId,
-        'format': 'json',
-        'limit': limit.toString(),
-        'tags': genre,
-        'include': 'musicinfo',
-        'audioformat': 'mp32',
-        'order': 'popularity_total',
-      },
-    );
+  // static Future<List<SongModel>> getTrendingByGenre(
+  //   String genre, {
+  //   int limit = 20,
+  // }) async {
+  //   final uri = Uri.parse('$_baseUrl/tracks/').replace(
+  //     queryParameters: {
+  //       'client_id': _clientId,
+  //       'format': 'json',
+  //       'limit': limit.toString(),
+  //       'tags': genre,
+  //       'include': 'musicinfo',
+  //       'audioformat': 'mp32',
+  //       'order': 'popularity_total',
+  //     },
+  //   );
 
-    try {
-      final res = await http.get(uri).timeout(const Duration(seconds: 10));
-      if (res.statusCode == 200) {
-        final data = jsonDecode(res.body);
-        final results = data['results'] as List? ?? [];
-        return results
-            .map((t) => Song.fromJamendo(t))
-            .where((s) => s.audioUrl.isNotEmpty)
-            .toList();
-      }
-    } catch (e) {
-      // ignore
-    }
-    return [];
-  }
+  //   try {
+  //     final res = await http.get(uri).timeout(const Duration(seconds: 10));
+  //     if (res.statusCode == 200) {
+  //       final data = jsonDecode(res.body);
+  //       final results = data['results'] as List? ?? [];
+  //       return results
+  //           .map((t) => SongModel.fromJamendo(t))
+  //           .where((s) => s.audioUrl.isNotEmpty)
+  //           .toList();
+  //     }
+  //   } catch (e) {
+  //     // ignore
+  //   }
+  //   return [];
+  // }
 
-  static Future<List<Song>> getFeatured({int limit = 20}) async {
+  static Future<List<SongModel>> getFeatured({int limit = 20}) async {
     final uri = Uri.parse('$_baseUrl/tracks/').replace(
       queryParameters: {
         'client_id': _clientId,
@@ -87,7 +90,7 @@ class JamendoService {
         final data = jsonDecode(res.body);
         final results = data['results'] as List? ?? [];
         return results
-            .map((t) => Song.fromJamendo(t))
+            .map((t) => SongModel.fromJamendo(t))
             .where((s) => s.audioUrl.isNotEmpty)
             .toList();
       }
