@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:melodex/theme/app_theme.dart';
+import 'package:melodex/widgets/custom_app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,11 +14,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.bg,
-      appBar: AppBar(
-        backgroundColor: AppTheme.bg,
-        title: Text('Melodex', style: TextStyle(color: Colors.white)),
-      ),
-      body: SafeArea(child: Column()),
+      appBar: AppBar(backgroundColor: AppTheme.bg, title: CustomAppBar()),
+      body: SafeArea(child: Column(children: [])),
     );
   }
 }
