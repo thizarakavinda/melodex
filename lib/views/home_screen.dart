@@ -15,7 +15,9 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: AppTheme.bg,
       appBar: AppBar(backgroundColor: AppTheme.bg, title: CustomAppBar()),
-      body: SafeArea(child: Column(children: [])),
+      body: SafeArea(child: Column(children: [
+        
+      ])),
     );
   }
 }
