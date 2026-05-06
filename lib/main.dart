@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
         highlightColor: Colors.transparent,
         splashFactory: NoSplash.splashFactory,
         textTheme: GoogleFonts.beVietnamProTextTheme(AppTheme.dark.textTheme),
+        
       ),
       home: const MainView(),
     );
