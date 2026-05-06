@@ -158,6 +158,23 @@ class MusicProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> searchTracks(String query) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      _queue = await JamendoService.searchSongs(query);
+      _currentIndex = -1;
+      notifyListeners();
+    } catch (e) {
+      _isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> clearSearch() async {
+    await loadFeaturedTracks();
+  }
+
   @override
   void dispose() {
     _player.dispose();

@@ -22,6 +22,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     });
   }
 
+  void _onSearchChanged(String query) {
+    if (query.isEmpty) {
+      context.read<MusicProvider>().loadFeaturedTracks();
+    } else {
+      context.read<MusicProvider>().searchTracks(query);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +49,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                   children: [
                     TextField(
                       controller: searchController,
-                      onChanged: (value) => setState(() {}),
+                      onChanged: (value) => _onSearchChanged(value),
                       onTapOutside: (event) => FocusScope.of(context).unfocus(),
                       decoration: InputDecoration(
                         hintText: 'Search for songs, artists...',
@@ -52,6 +60,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                                 onPressed: () {
                                   setState(() {
                                     searchController.clear();
+                                    context.read<MusicProvider>().clearSearch();
                                   });
                                 },
                                 icon: const Icon(Icons.close),
@@ -69,7 +78,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                     SizedBox(height: 30),
 
                     Text(
-                      'Featured Tracks',
+                      searchController.text.isEmpty
+                          ? 'Featured Tracks'
+                          : 'Search Results for "${searchController.text}"',
+
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         color: AppTheme.tertiary,
                         fontSize: 18,
